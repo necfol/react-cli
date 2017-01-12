@@ -13,7 +13,7 @@ npm run dev
 
 # build for production with minification
 npm run build
-```
+
 # build for production(zip) with minification
 npm run deploy
 ```
