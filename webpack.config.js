@@ -12,9 +12,13 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.css$/,
-        include: path.resolve(__dirname, 'src'),
-        loader: 'style-loader!css-loader'
+          test: /\.less$/i,
+          include: path.resolve(__dirname, 'src'),
+          loader: 'style-loader!css-loader!postcss-loader!less-loader'
+      },
+      {
+          test: /\.css$/,
+          loader: 'style-loader!css-loader!postcss-loader'
       },
       {
         test: /\.js[x]?$/,
@@ -41,7 +45,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.web.js', '.js', '.jsx']
   },
   devServer: {
     historyApiFallback: true,

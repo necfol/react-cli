@@ -14,21 +14,42 @@ module.exports = {
   },
   module: {
     loaders: [
-      {
-        test: /\.css$/,
-        include: path.resolve(__dirname, 'src'),
-        loader: 'style-loader!css-loader'
-      },
-      {
-        test: /\.js[x]?$/,
-        include: path.resolve(__dirname, 'src'),
-        exclude: /node_modules/,
-        loader: 'babel-loader'
-      }
+        {
+            test: /\.less$/i,
+            include: path.resolve(__dirname, 'src'),
+            loader: 'style-loader!css-loader!postcss-loader!less-loader'
+        },
+        {
+            test: /\.css$/,
+            loader: 'style-loader!css-loader!postcss-loader'
+        },
+        {
+            test: /\.js[x]?$/,
+            include: path.resolve(__dirname, 'src'),
+            exclude: /node_modules/,
+            loader: 'babel-loader'
+        },
+        {
+            test: /\.(png|jpg|gif|svg)$/,
+            loader: 'file-loader',
+            options: {
+                limit: 10000,
+                name: '[name].[ext]?[hash]'
+            }
+        },
+        {
+            test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
+            loader: 'url',
+            query: {
+                limit: 10000,
+                name: '[name].[ext]?[hash]'
+            }
+        }
     ]
   },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    modulesDirectories: ['node_modules', path.join(__dirname, '../node_modules')],
+    extensions: ['', '.web.js', '.js', '.jsx']
   },
   devtool: 'cheap-source-map',
   plugins: [
